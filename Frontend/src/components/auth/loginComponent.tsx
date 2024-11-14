@@ -8,7 +8,7 @@ import { TextField, Button, Box, Typography, CircularProgress } from '@mui/mater
 
 
 export const LoginComponent : React.FC = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const {request } = useAPI();
     const error = useSelector((state: RootState) => state.status.error);
@@ -20,7 +20,7 @@ export const LoginComponent : React.FC = () => {
         const response = await request({
              url: "http://localhost:3000/auth/login", 
              method: "POST", 
-             body: {email, password } 
+             body: {username, password } 
             });
     }
     return (
@@ -33,12 +33,12 @@ export const LoginComponent : React.FC = () => {
             <form onSubmit={handleRegister}>
                 <TextField
                     fullWidth
-                    label="Email"
+                    label="Username"
                     variant="outlined"
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     sx={{ marginBottom: 2 }}
                 />
                 <TextField
