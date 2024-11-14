@@ -33,6 +33,9 @@ export const RegisterComponent : React.FC = () => {
             body: { username, password, organizationStr }
         });   
     };
+    if (options.length === 0) {
+      
+    }
     return (
         <>
 <Box sx={{ maxWidth: 400, margin: '0 auto', padding: 2 }}>

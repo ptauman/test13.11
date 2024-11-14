@@ -4,9 +4,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material';
 
-
-
-
 export const LoginComponent : React.FC = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,6 +11,7 @@ export const LoginComponent : React.FC = () => {
     const error = useSelector((state: RootState) => state.status.error);
     const loading = useSelector((state: RootState) => state.status.loding);
     const success = useSelector((state: RootState) => state.status.sucssess);
+    
 
     const handleRegister = async (event: React.FormEvent) => {
         event.preventDefault();

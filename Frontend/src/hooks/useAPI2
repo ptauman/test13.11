@@ -4,11 +4,6 @@ import { setLoading, setError, setSuccess } from "../features/statusSlice";
 import {loginAndLogout} from "../features/authSlice";
 import { jwtDecode } from "jwt-decode";
 
-interface JwtPayload {
-    _id: string;
-    username: string|null;
-}
-
  export interface APIrequest {
     url: string,
     method: string,
@@ -18,7 +13,7 @@ interface JwtPayload {
 
 const useAPI = () => {
    const dispatch = useDispatch();
-    const request = async (data: APIrequest) => {
+    const requestb = async (data: APIrequest) => {
         dispatch(setSuccess(null));
         dispatch(setError(null));
         dispatch(setLoading(true));
@@ -28,13 +23,7 @@ const useAPI = () => {
                 data: data.body,
                 headers: data.token ? { Authorization: `Bearer ${data.token}` } : {}, 
             });
-            const token = response?.data?.token
-            if (token) {
-                document.cookie = `authToken=${token}; path=/; secure; samesite=strict; max-age=3600`
-                const tokenInfo = jwtDecode<JwtPayload>(token);
-                const username = tokenInfo.username || null;
-                dispatch(loginAndLogout({ isAuthenticated: true, username }));
-            }
+           
             dispatch(setSuccess(response.data.message));
             return response.data;           
         } catch (error: any) {
@@ -47,6 +36,6 @@ const useAPI = () => {
             dispatch(setLoading(false));
         }
     }   
-    return { request }
+    return { requestb }
 }
 export default useAPI
